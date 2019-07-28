@@ -6,7 +6,7 @@
 #include <ESP8266WiFi.h>
 
 #define TRIGGER_PIN 2
-#define MQTT_BROKER "[fe80::a2b3:ccff:fee9:51ee]"
+#define MQTT_BROKER "10.15.254.154"
 #define PSK "Das-Netzwerk-zu-Geidorf"
 #define SSID "CoWorking zu Geidorf"
 
@@ -54,19 +54,23 @@ void reconnect_mqtt()
   }
 }
 
-void handleInterrupt() {
+ICACHE_RAM_ATTR void handleInterrupt()
+{
   hasEvent = true;
 }
 
 void setup()
 {
-  pinMode(TRIGGER_PIN, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(TRIGGER_PIN), handleInterrupt, RISING);
+  //
+  // attachInterrupt(digitalPinToInterrupt(TRIGGER_PIN), handleInterrupt, RISING);
   Serial.begin(115200);
 
   setup_wifi();
 
   mqttClient.setServer(MQTT_BROKER, 1883);
+
+  // pinMode(TRIGGER_PIN, INPUT_PULLUP);
+  // attachInterrupt(digitalPinToInterrupt(TRIGGER_PIN), handleInterrupt, RISE);
 
   reconnect_mqtt();
 }
@@ -76,9 +80,11 @@ void loop()
   // if not connected reconnect to mosquito
   reconnect_mqtt();
 
-  if(hasEvent)
+  if (hasEvent)
   {
-    mqttClient.publish("/top10/power_meter/tick", ""); 
+    Serial.println("got event");
+    hasEvent = false;
+    mqttClient.publish("/top10/power_meter/tick", "");
   }
 
   mqttClient.loop();
