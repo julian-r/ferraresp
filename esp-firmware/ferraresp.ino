@@ -5,7 +5,8 @@
 #include <PubSubClient.h>
 #include <ESP8266WiFi.h>
 
-#define TRIGGER_PIN 2
+#define TRIGGER_PIN 14
+#define IND_LED 0
 #define MQTT_BROKER "10.15.254.154"
 #define PSK "Das-Netzwerk-zu-Geidorf"
 #define SSID "CoWorking zu Geidorf"
@@ -69,8 +70,10 @@ void setup()
 
   mqttClient.setServer(MQTT_BROKER, 1883);
 
-  // pinMode(TRIGGER_PIN, INPUT_PULLUP);
-  // attachInterrupt(digitalPinToInterrupt(TRIGGER_PIN), handleInterrupt, RISE);
+  pinMode(TRIGGER_PIN, INPUT_PULLUP);
+   digitalWrite(IND_LED, 1); // led off
+   pinMode(IND_LED, OUTPUT);
+  attachInterrupt(digitalPinToInterrupt(TRIGGER_PIN), handleInterrupt, RISING);
 
   reconnect_mqtt();
 }
@@ -85,6 +88,9 @@ void loop()
     Serial.println("got event");
     hasEvent = false;
     mqttClient.publish("/top10/power_meter/tick", "");
+    digitalWrite(IND_LED, 0);
+    delay(100);
+    digitalWrite(IND_LED, 1);
   }
 
   mqttClient.loop();
