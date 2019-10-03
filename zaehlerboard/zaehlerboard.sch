@@ -74,7 +74,7 @@ L Device:R R1
 U 1 1 5D361568
 P 4700 3350
 F 0 "R1" H 4630 3304 50  0000 R CNN
-F 1 "43" H 4630 3395 50  0000 R CNN
+F 1 "56" H 4630 3395 50  0000 R CNN
 F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal" V 4630 3350 50  0001 C CNN
 F 3 "~" H 4700 3350 50  0001 C CNN
 	1    4700 3350
@@ -109,7 +109,7 @@ Wire Wire Line
 Wire Wire Line
 	5750 3100 5750 3150
 Wire Wire Line
-	7150 3150 5750 3150
+	7150 3150 6450 3150
 Connection ~ 5750 3150
 Wire Wire Line
 	5750 3150 5750 3200
@@ -208,8 +208,6 @@ Connection ~ 6850 2550
 Wire Wire Line
 	6850 2550 6950 2550
 Wire Wire Line
-	7000 2700 7000 2950
-Wire Wire Line
 	7150 2550 7200 2550
 $Comp
 L Amplifier_Operational:LM2904 U3
@@ -220,17 +218,6 @@ F 1 "LM293" H 7658 3005 50  0000 L CNN
 F 2 "Package_DIP:DIP-8_W7.62mm_Socket" H 7700 3050 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl081.pdf" H 7700 3050 50  0001 C CNN
 	3    7700 3050
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:VDD #PWR04
-U 1 1 5D893A2A
-P 7600 2750
-F 0 "#PWR04" H 7600 2600 50  0001 C CNN
-F 1 "VDD" H 7617 2923 50  0000 C CNN
-F 2 "" H 7600 2750 50  0001 C CNN
-F 3 "" H 7600 2750 50  0001 C CNN
-	1    7600 2750
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -416,5 +403,94 @@ F 3 "" H 8350 3800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8350 3400 8350 3800
+	8350 3400 8350 3650
+$Comp
+L power:VCC #PWR04
+U 1 1 5D970631
+P 7600 2600
+F 0 "#PWR04" H 7600 2450 50  0001 C CNN
+F 1 "VCC" H 7617 2773 50  0000 C CNN
+F 2 "" H 7600 2600 50  0001 C CNN
+F 3 "" H 7600 2600 50  0001 C CNN
+	1    7600 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7600 2600 7600 2750
+$Comp
+L Device:R R4
+U 1 1 5D971A9F
+P 8700 2750
+F 0 "R4" H 8770 2796 50  0000 L CNN
+F 1 "3k3" H 8770 2705 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal" V 8630 2750 50  0001 C CNN
+F 3 "~" H 8700 2750 50  0001 C CNN
+	1    8700 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VDD #PWR010
+U 1 1 5D972537
+P 8700 2500
+F 0 "#PWR010" H 8700 2350 50  0001 C CNN
+F 1 "VDD" H 8717 2673 50  0000 C CNN
+F 2 "" H 8700 2500 50  0001 C CNN
+F 3 "" H 8700 2500 50  0001 C CNN
+	1    8700 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8700 2500 8700 2600
+Wire Wire Line
+	8700 2900 8700 3050
+Wire Wire Line
+	8700 3050 8350 3050
+$Comp
+L Connector_Generic:Conn_01x01 J3
+U 1 1 5D978361
+P 6600 2950
+F 0 "J3" H 6518 2725 50  0000 C CNN
+F 1 "Ref" H 6518 2816 50  0000 C CNN
+F 2 "Connector_Pin:Pin_D0.7mm_L6.5mm_W1.8mm_FlatFork" H 6600 2950 50  0001 C CNN
+F 3 "~" H 6600 2950 50  0001 C CNN
+	1    6600 2950
+	-1   0    0    1   
+$EndComp
+Connection ~ 7000 2950
+$Comp
+L Connector_Generic:Conn_01x01 J2
+U 1 1 5D979C69
+P 6450 3550
+F 0 "J2" V 6322 3630 50  0000 L CNN
+F 1 "Val" V 6413 3630 50  0000 L CNN
+F 2 "Connector_Pin:Pin_D0.7mm_L6.5mm_W1.8mm_FlatFork" H 6450 3550 50  0001 C CNN
+F 3 "~" H 6450 3550 50  0001 C CNN
+	1    6450 3550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6450 3350 6450 3150
+Connection ~ 6450 3150
+Wire Wire Line
+	6450 3150 5750 3150
+$Comp
+L Connector_Generic:Conn_01x01 J4
+U 1 1 5D97B40C
+P 8850 3650
+F 0 "J4" H 8930 3692 50  0000 L CNN
+F 1 "Gnd" H 8930 3601 50  0000 L CNN
+F 2 "Connector_Pin:Pin_D0.7mm_L6.5mm_W1.8mm_FlatFork" H 8850 3650 50  0001 C CNN
+F 3 "~" H 8850 3650 50  0001 C CNN
+	1    8850 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8650 3650 8350 3650
+Connection ~ 8350 3650
+Wire Wire Line
+	8350 3650 8350 3800
+Wire Wire Line
+	6800 2950 7000 2950
+Wire Wire Line
+	7000 2700 7000 2950
 $EndSCHEMATC
